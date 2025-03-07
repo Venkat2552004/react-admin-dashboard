@@ -4,7 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Link } from "react-router-dom";
 
 const SIDEBAR_ITEMS = [
-	{ name: "Alerts", icon: ShoppingBag, color: "#8B5CF6", href: "/products" },
+	{ name: "Alerts", icon: ShoppingBag, color: "#8B5CF6", href: "/alerts" },
 	{ name: "Settings", icon: Settings, color: "#6EE7B7", href: "/settings" },
 ];
 
