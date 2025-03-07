@@ -2,26 +2,45 @@ import { motion } from "framer-motion";
 import { Edit, Search, Trash2 } from "lucide-react";
 import { useState } from "react";
 
-const PRODUCT_DATA = [
-	{ id: 1, name: "Wireless Earbuds", category: "Electronics", price: 59.99, stock: 143, sales: 1200 },
-	{ id: 2, name: "Leather Wallet", category: "Accessories", price: 39.99, stock: 89, sales: 800 },
-	{ id: 3, name: "Smart Watch", category: "Electronics", price: 199.99, stock: 56, sales: 650 },
-	{ id: 4, name: "Yoga Mat", category: "Fitness", price: 29.99, stock: 210, sales: 950 },
-	{ id: 5, name: "Coffee Maker", category: "Home", price: 79.99, stock: 78, sales: 720 },
+const ALERT_DATA = [
+	{
+		id: 1,
+		name: "SNMP AgentX",
+		classification: "Attempted Information Leak",
+		priority: 2,
+		src_ip: "192.168.2.45:34385",
+		dest_ip: "172.28.83.69:161",
+	},
+	{
+		id: 2,
+		name: "ICMP Large ICMP Packet",
+		classification: "Potentially Bad Traffic",
+		priority: 2,
+		src_ip: "192.168.2.45:541",
+		dest_ip: "172.28.83.69:161",
+	},
+	{
+		id: 3,
+		name: "DDOS mstream",
+		classification: "Attempted Denial of Service",
+		priority: 1,
+		src_ip: "192.168.2.45:36418",
+		dest_ip: "172.28.83.69:161",
+	},
 ];
 
-const ProductsTable = () => {
+const AlertsTable = () => {
 	const [searchTerm, setSearchTerm] = useState("");
-	const [filteredProducts, setFilteredProducts] = useState(PRODUCT_DATA);
+	const [filteredAlerts, setFilteredAlerts] = useState(ALERT_DATA);
 
 	const handleSearch = (e) => {
 		const term = e.target.value.toLowerCase();
 		setSearchTerm(term);
-		const filtered = PRODUCT_DATA.filter(
+		const filtered = ALERT_DATA.filter(
 			(product) => product.name.toLowerCase().includes(term) || product.category.toLowerCase().includes(term)
 		);
 
-		setFilteredProducts(filtered);
+		setFilteredAlerts(filtered);
 	};
 
 	return (
@@ -32,11 +51,11 @@ const ProductsTable = () => {
 			transition={{ delay: 0.2 }}
 		>
 			<div className='flex justify-between items-center mb-6'>
-				<h2 className='text-xl font-semibold text-gray-100'>Product List</h2>
+				<h2 className='text-xl font-semibold text-gray-100'>Alert List</h2>
 				<div className='relative'>
 					<input
 						type='text'
-						placeholder='Search products...'
+						placeholder='Search attacks...'
 						className='bg-gray-700 text-white placeholder-gray-400 rounded-lg pl-10 pr-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500'
 						onChange={handleSearch}
 						value={searchTerm}
@@ -53,16 +72,16 @@ const ProductsTable = () => {
 								Name
 							</th>
 							<th className='px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider'>
-								Category
+								Classification
 							</th>
 							<th className='px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider'>
-								Price
+								Priority
 							</th>
 							<th className='px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider'>
-								Stock
+								Src IP
 							</th>
 							<th className='px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider'>
-								Sales
+								Dest IP
 							</th>
 							<th className='px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider'>
 								Actions
@@ -71,7 +90,7 @@ const ProductsTable = () => {
 					</thead>
 
 					<tbody className='divide-y divide-gray-700'>
-						{filteredProducts.map((product) => (
+						{filteredAlerts.map((product) => (
 							<motion.tr
 								key={product.id}
 								initial={{ opacity: 0 }}
@@ -81,21 +100,21 @@ const ProductsTable = () => {
 								<td className='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-100 flex gap-2 items-center'>
 									<img
 										src='https://images.unsplash.com/photo-1627989580309-bfaf3e58af6f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8d2lyZWxlc3MlMjBlYXJidWRzfGVufDB8fDB8fHww'
-										alt='Product img'
+										alt='Alert img'
 										className='size-10 rounded-full'
 									/>
 									{product.name}
 								</td>
 
 								<td className='px-6 py-4 whitespace-nowrap text-sm text-gray-300'>
-									{product.category}
+									{product.classification}
 								</td>
 
 								<td className='px-6 py-4 whitespace-nowrap text-sm text-gray-300'>
-									${product.price.toFixed(2)}
+									{product.priority}
 								</td>
-								<td className='px-6 py-4 whitespace-nowrap text-sm text-gray-300'>{product.stock}</td>
-								<td className='px-6 py-4 whitespace-nowrap text-sm text-gray-300'>{product.sales}</td>
+								<td className='px-6 py-4 whitespace-nowrap text-sm text-gray-300'>{product.src_ip}</td>
+								<td className='px-6 py-4 whitespace-nowrap text-sm text-gray-300'>{product.dest_ip}</td>
 								<td className='px-6 py-4 whitespace-nowrap text-sm text-gray-300'>
 									<button className='text-indigo-400 hover:text-indigo-300 mr-2'>
 										<Edit size={18} />
@@ -112,4 +131,4 @@ const ProductsTable = () => {
 		</motion.div>
 	);
 };
-export default ProductsTable;
+export default AlertsTable;
