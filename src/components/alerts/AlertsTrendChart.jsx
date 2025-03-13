@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from "recharts";
 
-const salesData = [
+const alertsData = [
 	{ month: "Nov", attacks: 3 },
 	{ month: "Dec", attacks: 6 },
 	{ month: "Jan", attacks: 7 },
@@ -20,7 +20,7 @@ const AlertsTrendChart = () => {
 			</h2>
 			<div style={{ width: "100%", height: 300 }}>
 				<ResponsiveContainer>
-					<LineChart data={salesData}>
+					<LineChart data={alertsData}>
 						<CartesianGrid strokeDasharray='3 3' stroke='#E5E7EB' />
 						<XAxis dataKey='month' stroke='#4B5563' />
 						<YAxis stroke='#4B5563' />
